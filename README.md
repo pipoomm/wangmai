@@ -29,7 +29,7 @@ In `connect.php` specified your database configuration and define API key for co
     	$api_key_value = "";
 	?>
 
-> Note: Register user account in `signin.php` To using CMUOauth please contact to [ITSC Chiang Mai University](https://oauth.cmu.ac.th/) to get token key first. 
+> Note: Register user account in `signin.php` before login to web application. To using CMUOauth for signin and get user's information in Chiang Mai University, please contact to [ITSC Chiang Mai University](https://oauth.cmu.ac.th/) to get token key first. 
 
 ## License
 
