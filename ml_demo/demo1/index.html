@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js"> </script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script type="text/javascript">
+		class wang_predictor
+		{
+			constructor(height, width) {
+				this.model = tf.loadLayersModel('model/model.json');
+			}
+			predict(data)
+			{
+				//const model = tf.loadLayersModel('model/model.json');
+				return this.model.then(model => {
+					//console.log('do!');
+					let pred_res = model.predict(tf.tensor(data));
+					//let res = pred_res.round().dataSync()[0];
+					// console.log(res);
+					// console.log(pred_res.round().dataSync())
+					// console.log(pred_res.round().dataSync().length)
+					return pred_res.round().dataSync();
+				})
+			}
+		}
+
+		$(document).ready(function(){
+			const wp = new wang_predictor(); //run once!
+			/*
+			let data = [
+
+						[300,25,534],
+
+						[553,25,598]
+
+						];
+
+			wp.predict(data).then((result) => {
+
+				console.log(result);
+				for(i in result)
+				{
+					console.log('data ' + i + ': ' + result[i])
+				}
+			});
+			*/
+			$('#predict_btn').click(function(){
+				let v1 = parseFloat($('#light_box').val());
+				let v2 = parseFloat($('#temp_box').val());
+				let v3 = parseFloat($('#sound_box').val());
+				let new_to_predict_data = [ [v1, v2, v3] ];
+				console.log(new_to_predict_data);
+				wp.predict(new_to_predict_data).then((result) => {
+					let show_txt = "ว่าง";
+					console.log(result[0]);
+					if(result[0] == 1)
+					{
+						show_txt = "ไม่ว่าง";
+					}
+					$('#result_box').text(show_txt);
+					let d = new Date();
+					$('#time_box').text(d.toLocaleString());
+				});
+			})
+		})
+	</script>
+</head>
+<body>
+	<center>
+		<div style="border: solid 2px black; width: 400px; margin: 3%;">
+			<div>
+				<span>light</span> 
+				<input style="display: block; position: relative; right: 1px; width: 200px;" type="text" id="light_box">
+			</div>
+			<div>
+				<span>temperature</span> 
+				<input style="display: block; position: relative; right: 1px; width: 200px;" type="text" id="temp_box">
+			</div>
+			<div>
+				<span>sound</span> 
+				<input style="display: block; position: relative; right: 1px; width: 200px;" type="text" id="sound_box">
+			</div>
+		</div>
+		<div style="border: solid 2px black; width: 400px; margin: 3%;">
+			<button id="predict_btn"> Predict </button>
+		</div>
+		<div style="border: solid 2px black; width: 400px; margin: 3%;">
+			<h2> Result: <span id="result_box">-</span> </h2> <br>
+			<h4> <span id="time_box">-</span> </h4>
+		</div>
+	</center>
+</body>
+</html>

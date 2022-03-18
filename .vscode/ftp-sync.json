@@ -1,0 +1,27 @@
+{
+    "remotePath": "./",
+    "host": "wangmai.eng.cmu.ac.th",
+    "username": "ftp_wangmai_eng_cmu_ac_th",
+    "password": "Y6ARj8pNCcfCckxf",
+    "port": 21,
+    "secure": false,
+    "protocol": "ftp",
+    "uploadOnSave": true,
+    "passive": false,
+    "debug": false,
+    "privateKeyPath": null,
+    "passphrase": null,
+    "agent": null,
+    "allow": [],
+    "ignore": [
+        "\\.vscode",
+        "\\.git",
+        "\\.DS_Store"
+    ],
+    "generatedFiles": {
+        "extensionsToInclude": [
+            ".php, .js, .html, .css"
+        ],
+        "path": ""
+    }
+}
